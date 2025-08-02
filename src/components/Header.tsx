@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BookOpen, Plus, Moon, Sun } from 'lucide-react';
+import { BookOpen, Plus, Moon, Sun, Folder, Users } from 'lucide-react';
 import { useThemeStore } from '../store/themeStore';
 import SearchBar from './SearchBar';
 import UserProfileDropdown from './UserProfileDropdown';
@@ -31,6 +31,33 @@ const Header: React.FC = () => {
           
           <div className="flex-1 max-w-2xl mx-8">
             <SearchBar />
+          </div>
+          
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center space-x-6 mr-6">
+            <Link
+              to="/app/folders"
+              className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                isDarkMode 
+                  ? 'text-gray-400 hover:text-white hover:bg-gray-700' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+              }`}
+            >
+              <Folder className="h-4 w-4" />
+              <span>Thư mục</span>
+            </Link>
+            
+            <Link
+              to="/app/classes"
+              className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                isDarkMode 
+                  ? 'text-gray-400 hover:text-white hover:bg-gray-700' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              <span>Lớp học</span>
+            </Link>
           </div>
           
           <div className="flex items-center space-x-4">
