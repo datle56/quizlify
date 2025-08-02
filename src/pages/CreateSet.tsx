@@ -99,22 +99,22 @@ const CreateSet: React.FC = () => {
             className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-4"
           >
             <ArrowLeft className="h-5 w-5" />
-            <span>Back to Dashboard</span>
+            <span>Quay lại trang chủ</span>
           </button>
           
-          <h1 className="text-3xl font-bold text-gray-900">Create a new study set</h1>
-          <p className="text-gray-600 mt-2">Add terms and definitions to create your flashcard set</p>
+          <h1 className="text-3xl font-bold text-gray-900">Tạo bộ học mới</h1>
+          <p className="text-gray-600 mt-2">Thêm từ và định nghĩa để tạo bộ thẻ ghi nhớ của bạn</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Info */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Study Set Information</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Thông tin bộ học</h2>
             
             <div className="space-y-4">
               <div>
                 <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
-                  Title *
+                  Tiêu đề *
                 </label>
                 <input
                   type="text"
@@ -122,14 +122,14 @@ const CreateSet: React.FC = () => {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter a title for your study set"
+                  placeholder="Nhập tiêu đề cho bộ học của bạn"
                   required
                 />
               </div>
               
               <div>
                 <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                  Description *
+                  Mô tả *
                 </label>
                 <textarea
                   id="description"
@@ -137,14 +137,14 @@ const CreateSet: React.FC = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   rows={3}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Describe what this study set is about"
+                  placeholder="Mô tả nội dung của bộ học này"
                   required
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Color Theme
+                  Màu chủ đề
                 </label>
                 <div className="flex space-x-2">
                   {colors.map((color) => (
@@ -166,7 +166,7 @@ const CreateSet: React.FC = () => {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-gray-900">
-                Cards ({cards.length})
+                Thẻ ({cards.length})
               </h2>
               <button
                 type="button"
@@ -174,7 +174,7 @@ const CreateSet: React.FC = () => {
                 className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 <Plus className="h-4 w-4" />
-                <span>Add Card</span>
+                <span>Thêm thẻ</span>
               </button>
             </div>
 
@@ -182,7 +182,7 @@ const CreateSet: React.FC = () => {
               {cards.map((card, index) => (
                 <div key={card.id} className="border border-gray-200 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-medium text-gray-500">Card {index + 1}</span>
+                    <span className="text-sm font-medium text-gray-500">Thẻ {index + 1}</span>
                     {cards.length > 2 && (
                       <button
                         type="button"
@@ -197,27 +197,27 @@ const CreateSet: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Term
+                        Từ
                       </label>
                       <input
                         type="text"
                         value={card.term}
                         onChange={(e) => updateCard(card.id, 'term', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter the term"
+                        placeholder="Nhập từ"
                       />
                     </div>
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Definition
+                        Định nghĩa
                       </label>
                       <input
                         type="text"
                         value={card.definition}
                         onChange={(e) => updateCard(card.id, 'definition', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter the definition"
+                        placeholder="Nhập định nghĩa"
                       />
                     </div>
                   </div>
@@ -233,7 +233,7 @@ const CreateSet: React.FC = () => {
               onClick={handleBack}
               className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
-              Cancel
+              Hủy
             </button>
             <button
               type="submit"
@@ -241,7 +241,7 @@ const CreateSet: React.FC = () => {
               className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Save className="h-4 w-4" />
-              <span>{isSubmitting ? 'Creating...' : 'Create Study Set'}</span>
+              <span>{isSubmitting ? 'Đang tạo...' : 'Tạo bộ học'}</span>
             </button>
           </div>
         </form>

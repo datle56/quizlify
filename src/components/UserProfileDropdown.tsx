@@ -86,7 +86,7 @@ const UserProfileDropdown: React.FC = () => {
                 className="w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-gray-50 transition-colors"
               >
                 <User className="h-5 w-5 text-gray-500" />
-                <span className="text-gray-700">Profile</span>
+                <span className="text-gray-700">Hồ sơ</span>
               </button>
 
               <button
@@ -94,7 +94,7 @@ const UserProfileDropdown: React.FC = () => {
                 className="w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-gray-50 transition-colors"
               >
                 <Trophy className="h-5 w-5 text-gray-500" />
-                <span className="text-gray-700">Analytics</span>
+                <span className="text-gray-700">Thống kê</span>
               </button>
 
               <button
@@ -102,13 +102,13 @@ const UserProfileDropdown: React.FC = () => {
                 className="w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-gray-50 transition-colors"
               >
                 <Settings className="h-5 w-5 text-gray-500" />
-                <span className="text-gray-700">Settings</span>
+                <span className="text-gray-700">Cài đặt</span>
               </button>
             </div>
 
             {/* Achievements Preview */}
             <div className="px-4 py-3 border-t border-gray-100">
-              <p className="text-xs font-medium text-gray-500 mb-2">Recent Achievements</p>
+              <p className="text-xs font-medium text-gray-500 mb-2">Thành tích gần đây</p>
               <div className="flex space-x-1">
                 {user.achievements.filter(a => a.unlocked).slice(0, 4).map((achievement) => (
                   <span
@@ -129,7 +129,7 @@ const UserProfileDropdown: React.FC = () => {
                 className="w-full flex items-center space-x-3 px-4 py-2 text-left hover:bg-red-50 transition-colors text-red-600"
               >
                 <LogOut className="h-5 w-5" />
-                <span>Logout</span>
+                <span>Đăng xuất</span>
               </button>
             </div>
           </motion.div>

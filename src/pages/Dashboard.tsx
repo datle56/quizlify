@@ -27,10 +27,10 @@ const Dashboard: React.FC = () => {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to Quizlify
+            Chào mừng đến với Quizlify
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Study with confidence using flashcards, practice tests, and expert-created content
+            Học tập tự tin với thẻ ghi nhớ, bài kiểm tra thực hành và nội dung do chuyên gia tạo
           </p>
         </div>
 
@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
               <TrendingUp className="h-8 w-8 text-blue-600 mr-3" />
               <div>
                 <p className="text-2xl font-bold text-gray-900">{quizSets.length}</p>
-                <p className="text-gray-600">Study Sets</p>
+                <p className="text-gray-600">Bộ học</p>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
                 <p className="text-2xl font-bold text-gray-900">
                   {quizSets.reduce((acc, set) => acc + set.termCount, 0)}
                 </p>
-                <p className="text-gray-600">Total Terms</p>
+                <p className="text-gray-600">Tổng số từ</p>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
               <Clock className="h-8 w-8 text-green-600 mr-3" />
               <div>
                 <p className="text-2xl font-bold text-gray-900">0</p>
-                <p className="text-gray-600">Hours Studied</p>
+                <p className="text-gray-600">Giờ học</p>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ const Dashboard: React.FC = () => {
 
         {/* Quiz Sets Grid */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Study Sets</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Bộ học của bạn</h2>
           {quizSets.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {quizSets.map((quizSet) => (
@@ -84,16 +84,16 @@ const Dashboard: React.FC = () => {
             <div className="text-center py-12">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  No study sets yet
+                  Chưa có bộ học nào
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Create your first study set to get started with learning
+                  Tạo bộ học đầu tiên để bắt đầu học tập
                 </p>
                 <button 
                   onClick={handleCreateSet}
                   className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Create Study Set
+                  Tạo bộ học
                 </button>
               </div>
             </div>

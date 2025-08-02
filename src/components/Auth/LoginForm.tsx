@@ -178,11 +178,11 @@ const LoginForm: React.FC = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
-                Remember me
+                Ghi nhớ đăng nhập
               </label>
             </div>
             <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
-              Forgot password?
+              Quên mật khẩu?
             </Link>
           </div>
 
@@ -196,7 +196,7 @@ const LoginForm: React.FC = () => {
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
             ) : (
               <>
-                <span>Sign in</span>
+                <span>Đăng nhập</span>
                 <ArrowRight className="h-5 w-5" />
               </>
             )}
@@ -211,9 +211,9 @@ const LoginForm: React.FC = () => {
           className="text-center"
         >
           <p className="text-gray-600">
-            Don't have an account?{' '}
+            Chưa có tài khoản?{' '}
             <Link to="/signup" className="text-blue-600 hover:text-blue-500 font-medium">
-              Sign up for free
+              Đăng ký ngay
             </Link>
           </p>
         </motion.div>

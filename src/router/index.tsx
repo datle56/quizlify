@@ -12,6 +12,9 @@ import CreateSet from '../pages/CreateSet';
 import Analytics from '../pages/Analytics';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
+import SearchResults from '../pages/SearchResults';
+import Folders from '../pages/Folders';
+import Classes from '../pages/Classes';
 import LoginForm from '../components/Auth/LoginForm';
 import SignupForm from '../components/Auth/SignupForm';
 import ProtectedRoute from '../components/ProtectedRoute';
@@ -43,6 +46,26 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />
+      },
+      {
+        path: 'search',
+        element: <SearchResults />
+      },
+      {
+        path: 'folders',
+        element: <Folders />
+      },
+      {
+        path: 'folders/:id',
+        element: <div>Folder Detail Page</div> // TODO: Implement FolderDetail component
+      },
+      {
+        path: 'classes',
+        element: <Classes />
+      },
+      {
+        path: 'classes/:id',
+        element: <div>Class Detail Page</div> // TODO: Implement ClassDetail component
       },
       {
         path: 'quiz/:id',
