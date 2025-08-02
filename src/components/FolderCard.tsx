@@ -1,5 +1,5 @@
 import React from 'react';
-import { Folder2, MoreVertical, Users, Calendar } from 'lucide-react';
+import { Folder as Folder2, MoreVertical, Users, Calendar } from 'lucide-react';
 import { Folder } from '../types';
 import { motion } from 'framer-motion';
 
