@@ -1,30 +1,24 @@
-import React, { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
-import LoadingSpinner from './LoadingSpinner';
+import React from "react"
+import { Navigate } from "react-router-dom"
+import { useAuth } from "../hooks/useAuth"
+import LoadingSpinner from "./LoadingSpinner"
 
 interface ProtectedRouteProps {
-  children: React.ReactNode;
+    children: React.ReactNode
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isAuthenticated, isLoading, autoLogin } = useAuthStore();
+    const { isAuthenticated, isLoading } = useAuth()
 
-  useEffect(() => {
-    if (!isAuthenticated && !isLoading) {
-      autoLogin();
+    if (isLoading) {
+        return <LoadingSpinner />
     }
-  }, [isAuthenticated, isLoading, autoLogin]);
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />
+    }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+    return <>{children}</>
+}
 
-  return <>{children}</>;
-};
-
-export default ProtectedRoute;
+export default ProtectedRoute
