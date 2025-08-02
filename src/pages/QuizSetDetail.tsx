@@ -69,36 +69,36 @@ const QuizSetDetail: React.FC = () => {
   const studyModes = [
     {
       id: 'flashcards',
-      title: 'Flashcards',
+      title: 'Thẻ ghi nhớ',
       subtitle: 'Thẻ ghi nhớ',
-      description: 'Study with interactive flashcards',
+      description: 'Học với thẻ ghi nhớ tương tác',
       icon: Play,
       color: 'from-blue-500 to-blue-600',
       action: handleStudyFlashcards
     },
     {
       id: 'learn',
-      title: 'Learn',
+      title: 'Học',
       subtitle: 'Tự học',
-      description: 'Adaptive learning mode',
+      description: 'Chế độ học thích ứng',
       icon: BookOpen,
       color: 'from-green-500 to-green-600',
       action: handleLearnMode
     },
     {
       id: 'test',
-      title: 'Test',
+      title: 'Kiểm tra',
       subtitle: 'Kiểm tra',
-      description: 'Practice test mode',
+      description: 'Chế độ kiểm tra thực hành',
       icon: Target,
       color: 'from-purple-500 to-purple-600',
       action: handleTestMode
     },
     {
       id: 'match',
-      title: 'Match',
+      title: 'Ghép thẻ',
       subtitle: 'Ghép thẻ',
-      description: 'Match terms with definitions',
+      description: 'Ghép từ với định nghĩa',
       icon: Shuffle,
       color: 'from-pink-500 to-pink-600',
       action: handleMatchMode
@@ -166,7 +166,7 @@ const QuizSetDetail: React.FC = () => {
               className={`flex items-center space-x-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition-colors`}
             >
               <ArrowLeft className="h-5 w-5" />
-              <span>Back to Dashboard</span>
+              <span>Quay lại trang chủ</span>
             </button>
             
             <div className="flex items-center space-x-4">
@@ -203,7 +203,7 @@ const QuizSetDetail: React.FC = () => {
                 }`}
               >
                 <Share2 className="h-4 w-4" />
-                <span>Share</span>
+                <span>Chia sẻ</span>
               </button>
             </div>
           </div>
@@ -221,11 +221,11 @@ const QuizSetDetail: React.FC = () => {
                 <span className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   {quizSet.termCount}
                 </span>
-                <span>terms</span>
+                <span>từ</span>
               </div>
               <div className="flex items-center space-x-2">
                 <User className="h-5 w-5" />
-                <span>Created by {quizSet.creator}</span>
+                <span>Tạo bởi {quizSet.creator}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Calendar className="h-5 w-5" />
@@ -243,7 +243,7 @@ const QuizSetDetail: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h2 className="text-2xl font-bold mb-6">Choose your study mode</h2>
+          <h2 className="text-2xl font-bold mb-6">Chọn chế độ học của bạn</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {studyModes.map((mode, index) => (
               <motion.button
@@ -286,9 +286,9 @@ const QuizSetDetail: React.FC = () => {
           className="mb-12"
         >
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Preview Flashcards</h2>
+            <h2 className="text-2xl font-bold">Xem trước thẻ ghi nhớ</h2>
             <div className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>
-              Card {currentCardIndex + 1} / {quizSet.cards.length}
+              Thẻ {currentCardIndex + 1} / {quizSet.cards.length}
             </div>
           </div>
 
@@ -320,7 +320,7 @@ const QuizSetDetail: React.FC = () => {
                         <span className={`text-sm font-medium uppercase tracking-wide mr-3 ${
                           isDarkMode ? 'text-gray-400' : 'text-gray-600'
                         }`}>
-                          {isFlipped ? 'Definition' : 'Term'}
+                          {isFlipped ? 'Định nghĩa' : 'Từ'}
                         </span>
                         <button 
                           onClick={(e) => {
@@ -342,7 +342,7 @@ const QuizSetDetail: React.FC = () => {
                       </div>
                       
                       <div className={isDarkMode ? 'text-gray-500' : 'text-gray-400'}>
-                        <p className="text-sm">Click to flip</p>
+                        <p className="text-sm">Nhấp để lật</p>
                       </div>
                     </div>
                   </motion.div>
@@ -359,7 +359,7 @@ const QuizSetDetail: React.FC = () => {
                 className="flex items-center space-x-3 px-8 py-4 bg-red-600 hover:bg-red-700 rounded-xl transition-colors font-semibold text-white"
               >
                 <span className="text-2xl">✗</span>
-                <span>Review Again</span>
+                <span>Xem lại</span>
               </button>
               
               <button
@@ -367,7 +367,7 @@ const QuizSetDetail: React.FC = () => {
                 className="flex items-center space-x-3 px-8 py-4 bg-green-600 hover:bg-green-700 rounded-xl transition-colors font-semibold text-white"
               >
                 <span className="text-2xl">✓</span>
-                <span>Got It</span>
+                <span>Hiểu rồi</span>
               </button>
             </div>
           )}
@@ -386,7 +386,7 @@ const QuizSetDetail: React.FC = () => {
               }`}
             >
               <ArrowLeft className="h-5 w-5" />
-              <span>Previous</span>
+              <span>Trước</span>
             </button>
             
             <button
@@ -400,7 +400,7 @@ const QuizSetDetail: React.FC = () => {
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              <span>Next</span>
+              <span>Tiếp</span>
               <ArrowLeft className="h-5 w-5 rotate-180" />
             </button>
           </div>
@@ -416,10 +416,10 @@ const QuizSetDetail: React.FC = () => {
           {/* Mastery Progress */}
           <div className={`rounded-2xl p-6 border ${cardClasses}`}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold">Mastery Progress</h3>
+              <h3 className="text-xl font-semibold">Tiến độ thành thạo</h3>
               <div className={`flex items-center space-x-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 <Trophy className="h-5 w-5" />
-                <span>0% mastered</span>
+                <span>0% thành thạo</span>
               </div>
             </div>
             
@@ -433,15 +433,15 @@ const QuizSetDetail: React.FC = () => {
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
                 <div className="text-2xl font-bold text-red-400">0</div>
-                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Not studied</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Chưa học</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-yellow-400">0</div>
-                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Familiar</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Quen thuộc</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-green-400">0</div>
-                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Mastered</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Thành thạo</div>
               </div>
             </div>
           </div>
@@ -451,7 +451,7 @@ const QuizSetDetail: React.FC = () => {
             <div className={`p-6 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold">
-                  Terms in this set ({quizSet.termCount})
+                  Từ trong bộ học này ({quizSet.termCount})
                 </h3>
                 <div className="flex items-center space-x-2">
                   <button className={`p-2 transition-colors ${
@@ -498,7 +498,7 @@ const QuizSetDetail: React.FC = () => {
                             <Volume2 className="h-4 w-4" />
                           </button>
                         </div>
-                        <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Term</p>
+                        <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Từ</p>
                       </div>
                       <div>
                         <div className="flex items-center space-x-2 mb-2">
@@ -512,7 +512,7 @@ const QuizSetDetail: React.FC = () => {
                             <Volume2 className="h-4 w-4" />
                           </button>
                         </div>
-                        <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Definition</p>
+                        <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Định nghĩa</p>
                       </div>
                     </div>
                   </div>

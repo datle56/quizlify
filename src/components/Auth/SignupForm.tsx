@@ -129,7 +129,7 @@ const SignupForm: React.FC = () => {
             <span className="text-2xl font-bold text-gray-900">Quizlify</span>
           </Link>
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Create your account</h2>
-          <p className="text-gray-600">Join millions of students learning with Quizlify</p>
+          <p className="text-gray-600">Tham gia cùng hàng triệu học sinh đang học với Quizlify</p>
         </div>
 
         {/* Form */}
@@ -144,7 +144,7 @@ const SignupForm: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                First name
+                Họ
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -157,7 +157,7 @@ const SignupForm: React.FC = () => {
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
                     errors.firstName ? 'border-red-500' : 'border-gray-300'
                   }`}
-                  placeholder="First name"
+                  placeholder="Nhập họ"
                 />
               </div>
               {errors.firstName && (
@@ -167,7 +167,7 @@ const SignupForm: React.FC = () => {
 
             <div>
               <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                Last name
+                Tên
               </label>
               <input
                 id="lastName"
@@ -178,7 +178,7 @@ const SignupForm: React.FC = () => {
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
                   errors.lastName ? 'border-red-500' : 'border-gray-300'
                 }`}
-                placeholder="Last name"
+                placeholder="Nhập tên"
               />
               {errors.lastName && (
                 <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
@@ -189,7 +189,7 @@ const SignupForm: React.FC = () => {
           {/* Email Field */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Email address
+              Địa chỉ Email
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -202,7 +202,7 @@ const SignupForm: React.FC = () => {
                 className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
                   errors.email ? 'border-red-500' : 'border-gray-300'
                 }`}
-                placeholder="Enter your email"
+                placeholder="Nhập email của bạn"
               />
             </div>
             {errors.email && (
@@ -213,7 +213,7 @@ const SignupForm: React.FC = () => {
           {/* Password Field */}
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Password
+              Mật khẩu
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -226,7 +226,7 @@ const SignupForm: React.FC = () => {
                 className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
                   errors.password ? 'border-red-500' : 'border-gray-300'
                 }`}
-                placeholder="Create a password"
+                placeholder="Tạo mật khẩu"
               />
               <button
                 type="button"
@@ -260,7 +260,7 @@ const SignupForm: React.FC = () => {
           {/* Confirm Password Field */}
           <div>
             <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-              Confirm password
+              Xác nhận mật khẩu
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -273,7 +273,7 @@ const SignupForm: React.FC = () => {
                 className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
                   errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
                 }`}
-                placeholder="Confirm your password"
+                placeholder="Xác nhận mật khẩu"
               />
               <button
                 type="button"
@@ -300,13 +300,13 @@ const SignupForm: React.FC = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
               />
               <label htmlFor="agreeToTerms" className="ml-2 block text-sm text-gray-700">
-                I agree to the{' '}
+                Tôi đồng ý với{' '}
                 <Link to="/terms" className="text-blue-600 hover:text-blue-500">
-                  Terms of Service
+                  Điều khoản dịch vụ
                 </Link>{' '}
-                and{' '}
+                và{' '}
                 <Link to="/privacy" className="text-blue-600 hover:text-blue-500">
-                  Privacy Policy
+                  Chính sách bảo mật
                 </Link>
               </label>
             </div>
@@ -324,7 +324,7 @@ const SignupForm: React.FC = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
               />
               <label htmlFor="subscribeNewsletter" className="ml-2 block text-sm text-gray-700">
-                Send me study tips and product updates (optional)
+                Gửi cho tôi mẹo học tập và cập nhật sản phẩm (tùy chọn)
               </label>
             </div>
           </div>
@@ -339,7 +339,7 @@ const SignupForm: React.FC = () => {
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
             ) : (
               <>
-                <span>Create account</span>
+                <span>Tạo tài khoản</span>
                 <ArrowRight className="h-5 w-5" />
               </>
             )}
@@ -347,19 +347,19 @@ const SignupForm: React.FC = () => {
 
           {/* Benefits */}
           <div className="bg-blue-50 rounded-lg p-4">
-            <h4 className="font-medium text-gray-900 mb-2">What you get with your free account:</h4>
+            <h4 className="font-medium text-gray-900 mb-2">Những gì bạn nhận được với tài khoản miễn phí:</h4>
             <ul className="space-y-1 text-sm text-gray-600">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-green-500 mr-2" />
-                Unlimited study sets
+                Tạo bộ học không giới hạn
               </li>
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-green-500 mr-2" />
-                Mobile app access
+                Truy cập ứng dụng di động
               </li>
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-green-500 mr-2" />
-                Basic progress tracking
+                Theo dõi tiến độ cơ bản
               </li>
             </ul>
           </div>
@@ -373,9 +373,9 @@ const SignupForm: React.FC = () => {
           className="text-center"
         >
           <p className="text-gray-600">
-            Already have an account?{' '}
+            Đã có tài khoản?{' '}
             <Link to="/login" className="text-blue-600 hover:text-blue-500 font-medium">
-              Sign in
+              Đăng nhập
             </Link>
           </p>
         </motion.div>

@@ -12,6 +12,7 @@ import CreateSet from '../pages/CreateSet';
 import Analytics from '../pages/Analytics';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
+import SearchResults from '../pages/SearchResults';
 import LoginForm from '../components/Auth/LoginForm';
 import SignupForm from '../components/Auth/SignupForm';
 import ProtectedRoute from '../components/ProtectedRoute';
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />
+      },
+      {
+        path: 'search',
+        element: <SearchResults />
       },
       {
         path: 'quiz/:id',

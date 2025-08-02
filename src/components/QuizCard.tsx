@@ -25,7 +25,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ quizSet, onClick }) => {
         <div className="flex items-center justify-between text-sm text-gray-500">
           <div className="flex items-center space-x-4">
             <span className="font-medium text-gray-700">
-              {quizSet.termCount} terms
+              {quizSet.termCount} từ
             </span>
             <div className="flex items-center space-x-1">
               <Users className="h-4 w-4" />

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BookOpen, Search, Plus, Moon, Sun } from 'lucide-react';
+import { BookOpen, Plus, Moon, Sun } from 'lucide-react';
 import { useThemeStore } from '../store/themeStore';
+import SearchBar from './SearchBar';
 import UserProfileDropdown from './UserProfileDropdown';
+import NotificationDropdown from './NotificationDropdown';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -28,20 +30,7 @@ const Header: React.FC = () => {
           </Link>
           
           <div className="flex-1 max-w-2xl mx-8">
-            <div className="relative">
-              <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-400'
-              }`} />
-              <input
-                type="text"
-                placeholder="Search for study sets, textbooks, questions and more"
-                className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  isDarkMode 
-                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                }`}
-              />
-            </div>
+            <SearchBar />
           </div>
           
           <div className="flex items-center space-x-4">
@@ -57,12 +46,14 @@ const Header: React.FC = () => {
               {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
             
+            <NotificationDropdown />
+            
             <button
               onClick={handleCreateSet}
               className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
               <Plus className="h-4 w-4" />
-              <span>Create</span>
+              <span>Tạo mới</span>
             </button>
             
             <UserProfileDropdown />
