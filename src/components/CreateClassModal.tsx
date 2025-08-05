@@ -40,12 +40,12 @@ const CreateClassModal: React.FC<CreateClassModalProps> = ({ onClose, onSubmit }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name.trim() && formData.subject) {
+    if (formData.name.trim() && formData.description.trim()) {
       const finalData = {
-        ...formData,
-        teacherId: 'user_001', // This would come from auth context
-        teacherName: 'Bạn',
-        joinCode: formData.joinCode || Math.random().toString(36).substring(2, 8).toUpperCase()
+        name: formData.name.trim(),
+        description: formData.description.trim(),
+        ...(formData.subject && { subject: formData.subject }),
+        ...(formData.school && { school: formData.school })
       };
       onSubmit(finalData);
     }
@@ -136,7 +136,7 @@ const CreateClassModal: React.FC<CreateClassModalProps> = ({ onClose, onSubmit }
 
                 <div>
                   <label htmlFor="description" className="block text-sm font-medium mb-2">
-                    Mô tả
+                    Mô tả *
                   </label>
                   <textarea
                     id="description"
@@ -149,12 +149,13 @@ const CreateClassModal: React.FC<CreateClassModalProps> = ({ onClose, onSubmit }
                         : 'bg-white border-gray-300 text-gray-900'
                     }`}
                     placeholder="Mô tả về lớp học này"
+                    required
                   />
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                    Môn học *
+                    Môn học
                   </label>
                   <select
                     id="subject"
@@ -165,9 +166,8 @@ const CreateClassModal: React.FC<CreateClassModalProps> = ({ onClose, onSubmit }
                         ? 'bg-gray-700 border-gray-600 text-white' 
                         : 'bg-white border-gray-300 text-gray-900'
                     }`}
-                    required
                   >
-                    <option value="">Chọn môn học</option>
+                    <option value="">Chọn môn học (tùy chọn)</option>
                     {subjects.map((subject) => (
                       <option key={subject} value={subject}>{subject}</option>
                     ))}
@@ -188,7 +188,7 @@ const CreateClassModal: React.FC<CreateClassModalProps> = ({ onClose, onSubmit }
                         ? 'bg-gray-700 border-gray-600 text-white' 
                         : 'bg-white border-gray-300 text-gray-900'
                     }`}
-                    placeholder="Tên trường hoặc tổ chức"
+                    placeholder="Tên trường hoặc tổ chức (tùy chọn)"
                   />
                 </div>
               </div>
@@ -378,7 +378,8 @@ const CreateClassModal: React.FC<CreateClassModalProps> = ({ onClose, onSubmit }
               {currentTab === 'organization' ? (
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  disabled={!formData.name.trim() || !formData.description.trim()}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Tạo lớp học
                 </button>

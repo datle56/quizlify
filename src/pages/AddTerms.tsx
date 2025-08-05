@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
-import { getAuthToken, apiRequest, BASE_URL } from "../utils/api"
+import { getAuthToken, BASE_URL } from "../utils/api"
 import { ArrowLeft, Plus, Trash2, Save, BookOpen, Info, CheckCircle } from "lucide-react"
 
 interface Term {

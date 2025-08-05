@@ -16,9 +16,10 @@ import Profile from "../pages/Profile"
 import Settings from "../pages/Settings"
 import SearchResults from "../pages/SearchResults"
 import Folders from "../pages/Folders"
-import Classes from "../pages/Classes"
-import ClassDetail from "../pages/ClassDetail"
+import Classes from "../pages/Class"
+import ClassDetail from "../pages/Class/ClassDetail"
 import FolderDetail from "../pages/FolderDetail"
+import PublicFolderDetail from "../pages/PublicFolderDetail"
 import LoginForm from "../components/Auth/LoginForm"
 import SignupForm from "../components/Auth/SignupForm"
 import ProtectedRoute from "../components/ProtectedRoute"
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             {
                 path: "folders/:id",
                 element: <FolderDetail />,
+            },
+            {
+                path: "folders/public/:id",
+                element: <PublicFolderDetail />,
             },
             {
                 path: "classes",

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { QuizSet } from '../types';
 import { loadQuizSets, saveQuizSets } from '../utils/storage';
-import quizSetsData from '../data/quizSets.json';
 
 export const useQuizSets = () => {
   const [quizSets, setQuizSets] = useState<QuizSet[]>([]);
@@ -9,17 +8,7 @@ export const useQuizSets = () => {
 
   useEffect(() => {
     const initializeData = () => {
-      let stored = loadQuizSets();
-      
-      // If no data in localStorage, use default data
-      if (stored.length === 0) {
-        stored = quizSetsData.map(set => ({
-          ...set,
-          userId: 'default_user'
-        }));
-        saveQuizSets(stored);
-      }
-      
+      const stored = loadQuizSets();
       setQuizSets(stored);
       setLoading(false);
     };

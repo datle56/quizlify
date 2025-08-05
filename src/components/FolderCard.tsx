@@ -1,5 +1,5 @@
 import React from 'react';
-import { Folder as Folder2, MoreVertical, Users, Calendar } from 'lucide-react';
+import { Folder as Folder2, MoreVertical, Users, Calendar, Globe, Lock } from 'lucide-react';
 import { Folder } from '../types';
 import { motion } from 'framer-motion';
 
@@ -7,12 +7,18 @@ interface FolderCardProps {
   folder: Folder;
   onClick: (id: string) => void;
   onContextMenu?: (folder: Folder, event: React.MouseEvent) => void;
+  onTogglePublic?: (folderId: string, isPublic: boolean) => void;
 }
 
-const FolderCard: React.FC<FolderCardProps> = ({ folder, onClick, onContextMenu }) => {
+const FolderCard: React.FC<FolderCardProps> = ({ folder, onClick, onContextMenu, onTogglePublic }) => {
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     onContextMenu?.(folder, e);
+  };
+
+  const handleTogglePublic = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onTogglePublic?.(folder.id, !folder.isPublic);
   };
 
   const getTypeLabel = (type?: string) => {
@@ -57,11 +63,36 @@ const FolderCard: React.FC<FolderCardProps> = ({ folder, onClick, onContextMenu 
               <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
                 {folder.name}
               </h3>
-              {folder.type && (
-                <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${getTypeColor(folder.type)}`}>
-                  {getTypeLabel(folder.type)}
-                </span>
-              )}
+              <div className="flex items-center space-x-2 mt-1">
+                {folder.type && (
+                  <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${getTypeColor(folder.type)}`}>
+                    {getTypeLabel(folder.type)}
+                  </span>
+                )}
+                {folder.isPublic !== undefined && (
+                  <button
+                    onClick={handleTogglePublic}
+                    className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full transition-colors ${
+                      folder.isPublic 
+                        ? 'bg-green-100 text-green-700 hover:bg-green-200' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                    title={folder.isPublic ? 'Công khai - Click để ẩn' : 'Riêng tư - Click để công khai'}
+                  >
+                    {folder.isPublic ? (
+                      <>
+                        <Globe className="h-3 w-3 mr-1" />
+                        Công khai
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="h-3 w-3 mr-1" />
+                        Riêng tư
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
             </div>
           </div>
           

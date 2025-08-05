@@ -5,14 +5,17 @@ import { useThemeStore } from '../store/themeStore';
 
 interface JoinClassModalProps {
   onClose: () => void;
-  onSubmit: (joinCode: string) => boolean;
+  onSubmit: (joinCode: string) => Promise<boolean>;
+  isLoading?: boolean;
 }
 
-const JoinClassModal: React.FC<JoinClassModalProps> = ({ onClose, onSubmit }) => {
+const JoinClassModal: React.FC<JoinClassModalProps> = ({ onClose, onSubmit, isLoading: externalLoading }) => {
   const { isDarkMode } = useThemeStore();
   const [joinCode, setJoinCode] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [internalLoading, setInternalLoading] = useState(false);
+
+  const isLoading = externalLoading || internalLoading;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,19 +24,20 @@ const JoinClassModal: React.FC<JoinClassModalProps> = ({ onClose, onSubmit }) =>
       return;
     }
 
-    setIsLoading(true);
+    setInternalLoading(true);
     setError('');
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    const success = onSubmit(joinCode.trim().toUpperCase());
-    
-    if (!success) {
-      setError('Mã lớp không hợp lệ hoặc không tồn tại');
+    try {
+      const success = await onSubmit(joinCode.trim().toUpperCase());
+      
+      if (!success) {
+        setError('Mã lớp không hợp lệ hoặc không tồn tại');
+      }
+    } catch (error) {
+      setError('Có lỗi xảy ra khi tham gia lớp học');
+    } finally {
+      setInternalLoading(false);
     }
-    
-    setIsLoading(false);
   };
 
   const modalClasses = isDarkMode 

@@ -4,6 +4,19 @@ export interface Card {
     definition: string
 }
 
+export interface Term {
+    id: number
+    term: string
+    definition: string
+    image_url: string
+    audio_url: string
+    study_set_id: number
+    position: number
+    created_at: string
+    updated_at: string
+    starred?: boolean
+}
+
 export interface QuizSet {
     id: string
     title: string
@@ -22,6 +35,11 @@ export interface QuizSet {
     tags?: string[]
     difficulty?: "beginner" | "intermediate" | "advanced"
     subject?: string
+    progress?: number
+    average_rating?: number
+    views_count?: number
+    favorites_count?: number
+    lastStudied?: string
 }
 
 export type ViewMode =
@@ -43,6 +61,7 @@ export interface Folder {
     updatedAt: string
     studySetCount: number
     isSmartFolder?: boolean
+    isPublic?: boolean
     smartRules?: SmartFolderRule[]
     permissions?: FolderPermissions
     type?: "personal" | "class" | "assignment" | "resource" | "test" | "topic"

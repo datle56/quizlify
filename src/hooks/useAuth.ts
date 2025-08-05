@@ -3,7 +3,7 @@ import { useAuthStore } from "../store/authStore"
 import { getAuthToken } from "../utils/api"
 
 export const useAuth = () => {
-    const { isAuthenticated, isLoading, autoLogin, hasAttemptedAutoLogin } = useAuthStore()
+    const { user, isAuthenticated, isLoading, autoLogin, hasAttemptedAutoLogin } = useAuthStore()
 
     useEffect(() => {
         // Chỉ gọi autoLogin một lần khi chưa thử và không đang loading
@@ -22,6 +22,7 @@ export const useAuth = () => {
     }
 
     return {
+        user,
         isAuthenticated,
         isLoading,
         getToken,

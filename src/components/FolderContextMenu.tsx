@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Edit, Trash2, Share2, Copy, Palette, FolderOpen } from 'lucide-react';
+import { Edit, Trash2, Share2, Copy, Palette, FolderOpen, Globe, Lock } from 'lucide-react';
 import { useThemeStore } from '../store/themeStore';
 import { Folder } from '../types';
 
@@ -11,6 +11,7 @@ interface FolderContextMenuProps {
   onClose: () => void;
   onUpdate: (id: string, updates: Partial<Folder>) => void;
   onDelete: (id: string) => void;
+  onTogglePublic?: (folderId: string, isPublic: boolean) => void;
 }
 
 const FolderContextMenu: React.FC<FolderContextMenuProps> = ({
@@ -19,7 +20,8 @@ const FolderContextMenu: React.FC<FolderContextMenuProps> = ({
   y,
   onClose,
   onUpdate,
-  onDelete
+  onDelete,
+  onTogglePublic
 }) => {
   const { isDarkMode } = useThemeStore();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -78,6 +80,14 @@ const FolderContextMenu: React.FC<FolderContextMenuProps> = ({
         onClose();
       }
     },
+    ...(onTogglePublic ? [{
+      icon: folder.isPublic ? Lock : Globe,
+      label: folder.isPublic ? 'Đặt thành riêng tư' : 'Đặt thành công khai',
+      action: () => {
+        onTogglePublic(folder.id, !folder.isPublic);
+        onClose();
+      }
+    }] : []),
     {
       icon: Copy,
       label: 'Sao chép',

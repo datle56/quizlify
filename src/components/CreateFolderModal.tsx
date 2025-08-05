@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, Folder, Sparkles, Palette } from 'lucide-react';
+import { X, Folder, Sparkles, Palette, Globe, Lock } from 'lucide-react';
 import { useThemeStore } from '../store/themeStore';
 
 interface CreateFolderModalProps {
   onClose: () => void;
-  onSubmit: (folderData: any) => void;
+  onSubmit: (folderData: {
+    name: string;
+    description?: string;
+    color?: string;
+    icon?: string;
+    isPublic?: boolean;
+    isSmartFolder?: boolean;
+  }) => void;
 }
 
 const CreateFolderModal: React.FC<CreateFolderModalProps> = ({ onClose, onSubmit }) => {
@@ -15,7 +22,8 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({ onClose, onSubmit
     description: '',
     color: 'bg-blue-500',
     icon: '📁',
-    isSmartFolder: false
+    isSmartFolder: false,
+    isPublic: false
   });
 
   const colors = [
@@ -155,6 +163,48 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({ onClose, onSubmit
             />
           </div>
 
+          {/* Privacy Setting */}
+          <div>
+            <label className="block text-sm font-medium mb-3">Quyền riêng tư</label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, isPublic: false }))}
+                className={`p-4 rounded-lg border-2 transition-colors ${
+                  !formData.isPublic
+                    ? 'border-gray-500 bg-gray-50 dark:bg-gray-700'
+                    : isDarkMode
+                      ? 'border-gray-600 hover:border-gray-500'
+                      : 'border-gray-300 hover:border-gray-400'
+                }`}
+              >
+                <Lock className="h-6 w-6 mx-auto mb-2" />
+                <p className="font-medium">Riêng tư</p>
+                <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Chỉ bạn có thể xem
+                </p>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, isPublic: true }))}
+                className={`p-4 rounded-lg border-2 transition-colors ${
+                  formData.isPublic
+                    ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
+                    : isDarkMode
+                      ? 'border-gray-600 hover:border-gray-500'
+                      : 'border-gray-300 hover:border-gray-400'
+                }`}
+              >
+                <Globe className="h-6 w-6 mx-auto mb-2" />
+                <p className="font-medium">Công khai</p>
+                <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Mọi người có thể xem
+                </p>
+              </button>
+            </div>
+          </div>
+
           {/* Color */}
           <div>
             <label className="block text-sm font-medium mb-3">
@@ -208,11 +258,30 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({ onClose, onSubmit
                 <div className={`w-10 h-10 ${formData.color} rounded-lg flex items-center justify-center text-white`}>
                   {formData.icon}
                 </div>
-                <div>
+                <div className="flex-1">
                   <p className="font-medium">{formData.name || 'Tên thư mục'}</p>
                   <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                     {formData.description || 'Mô tả thư mục'}
                   </p>
+                  <div className="flex items-center space-x-2 mt-1">
+                    {formData.isPublic ? (
+                      <span className="inline-flex items-center px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                        <Globe className="h-3 w-3 mr-1" />
+                        Công khai
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
+                        <Lock className="h-3 w-3 mr-1" />
+                        Riêng tư
+                      </span>
+                    )}
+                    {formData.isSmartFolder && (
+                      <span className="inline-flex items-center px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">
+                        <Sparkles className="h-3 w-3 mr-1" />
+                        Thông minh
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

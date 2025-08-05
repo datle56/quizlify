@@ -2,44 +2,62 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Search, Users, BookOpen } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useClasses } from '../hooks/useClasses';
-import { useThemeStore } from '../store/themeStore';
-import ClassCard from '../components/ClassCard';
-import LoadingSpinner from '../components/LoadingSpinner';
-import CreateClassModal from '../components/CreateClassModal';
-import JoinClassModal from '../components/JoinClassModal';
+import { useClasses } from '../../hooks/useClasses';
+import { useAuthStore } from '../../store/authStore';
+import { useThemeStore } from '../../store/themeStore';
+import ClassCard from '../../components/ClassCard';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import CreateClassModal from '../../components/CreateClassModal';
+import JoinClassModal from '../../components/JoinClassModal';
 
 const Classes: React.FC = () => {
   const navigate = useNavigate();
   const { classes, loading, createClass, joinClass } = useClasses();
+  const { user } = useAuthStore();
   const { isDarkMode } = useThemeStore();
   
   const [searchQuery, setSearchQuery] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showJoinModal, setShowJoinModal] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [isJoining, setIsJoining] = useState(false);
 
   const filteredClasses = classes.filter(cls => 
     cls.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    cls.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    cls.teacherName.toLowerCase().includes(searchQuery.toLowerCase())
+    cls.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleClassClick = (id: string) => {
     navigate(`/app/classes/${id}`);
   };
 
-  const handleCreateClass = (classData: any) => {
-    createClass(classData);
-    setShowCreateModal(false);
+  const handleCreateClass = async (classData: any) => {
+    try {
+      setIsCreating(true);
+      await createClass(classData);
+      setShowCreateModal(false);
+    } catch (error) {
+      console.error('Error creating class:', error);
+    } finally {
+      setIsCreating(false);
+    }
   };
 
-  const handleJoinClass = (joinCode: string) => {
-    const joinedClass = joinClass(joinCode);
-    if (joinedClass) {
-      setShowJoinModal(false);
-      navigate(`/app/classes/${joinedClass.id}`);
+  const handleJoinClass = async (joinCode: string) => {
+    try {
+      setIsJoining(true);
+      const joinedClass = await joinClass(joinCode);
+      if (joinedClass) {
+        setShowJoinModal(false);
+        navigate(`/app/classes/${joinedClass.id}`);
+      }
+      return !!joinedClass;
+    } catch (error) {
+      console.error('Error joining class:', error);
+      return false;
+    } finally {
+      setIsJoining(false);
     }
-    return !!joinedClass;
   };
 
   const themeClasses = isDarkMode 
@@ -175,9 +193,25 @@ const Classes: React.FC = () => {
                 transition={{ delay: index * 0.05 }}
               >
                 <ClassCard
-                  classData={classData}
+                  classData={{
+                    id: classData.id.toString(),
+                    name: classData.name,
+                    description: classData.description,
+                    subject: classData.subject || 'Không xác định',
+                    school: classData.school || 'Không xác định',
+                    teacherId: classData.teacher_id.toString(),
+                    teacherName: classData.teacher ? `${classData.teacher.first_name} ${classData.teacher.last_name}` : 'Giáo viên',
+                    joinCode: classData.join_code,
+                    isPublic: true,
+                    allowStudentSets: true,
+                    createdAt: classData.created_at,
+                    updatedAt: classData.created_at,
+                    memberCount: classData.member_count || classData.members?.length || 0,
+                    studySetCount: classData.study_set_count || classData.study_sets?.length || 0,
+                    folders: []
+                  }}
                   onClick={handleClassClick}
-                  userRole="student" // This would come from user context
+                  userRole={user ? 'teacher' : 'student'}
                 />
               </motion.div>
             ))}
@@ -234,6 +268,7 @@ const Classes: React.FC = () => {
           <JoinClassModal
             onClose={() => setShowJoinModal(false)}
             onSubmit={handleJoinClass}
+            isLoading={isJoining}
           />
         )}
       </AnimatePresence>
@@ -241,4 +276,4 @@ const Classes: React.FC = () => {
   );
 };
 
-export default Classes;
+export default Classes; 

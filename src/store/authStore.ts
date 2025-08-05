@@ -3,26 +3,19 @@ import { persist } from "zustand/middleware"
 import { apiRequest } from "../utils/api"
 
 export interface LoginUser {
-    id: string
+    id: number
+    first_name: string
+    last_name: string
     email: string
-    username: string
-    avatar: string
-    joinDate: string
-    preferences: {
-        darkMode: boolean
-        language: string
-        notifications: boolean
-        autoPlay: boolean
-        studyReminders: boolean
-    }
-    achievements: Array<{
-        id: string
-        title: string
-        description: string
-        date: string
-        badge: string
-        unlocked: boolean
-    }>
+    avatar_url: string | null
+    receive_tips: boolean
+    is_premium: boolean
+    created_at: string
+    updated_at: string
+    last_active_at: string | null
+    total_study_sets_created: number
+    total_terms_learned: number
+    role?: 'teacher' | 'student' | 'admin'
 }
 
 interface AuthState {
@@ -39,6 +32,7 @@ interface AuthState {
         email: string
         password: string
     }) => Promise<boolean>
+    getCurrentUser: () => Promise<LoginUser | null>
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -118,6 +112,25 @@ export const useAuthStore = create<AuthState>()(
                         isAuthenticated: false,
                         user: null,
                     })
+                }
+            },
+
+            getCurrentUser: async () => {
+                try {
+                    const access_token = localStorage.getItem("access_token")
+                    if (!access_token) {
+                        return null
+                    }
+
+                    const user = await apiRequest<any>(
+                        "/users/me",
+                        { method: "GET" },
+                        access_token
+                    )
+                    return user
+                } catch (error) {
+                    console.error("Error getting current user:", error)
+                    return null
                 }
             },
             
